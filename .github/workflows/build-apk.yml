@@ -2,7 +2,8 @@ name: Build Flutter APK (Debug)
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
@@ -16,7 +17,7 @@ jobs:
       - name: Set up Java
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
+          distribution: temurin
           java-version: '17'
 
       - name: Install Flutter
@@ -29,11 +30,11 @@ jobs:
         run: flutter doctor
 
       - name: Install dependencies
+        working-directory: doner_admin
         run: flutter pub get
-          cd doner_admin
-          flutter pub get
 
       - name: Build debug APK
+        working-directory: doner_admin
         run: flutter build apk --debug
 
       - name: Upload APK
@@ -41,4 +42,3 @@ jobs:
         with:
           name: app-debug
           path: doner_admin/build/app/outputs/flutter-apk/app-debug.apk
-
