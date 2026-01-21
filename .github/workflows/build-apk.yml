@@ -30,15 +30,13 @@ jobs:
         run: flutter doctor
 
       - name: Install dependencies
-        working-directory: doner_admin
         run: flutter pub get
 
       - name: Build debug APK
-        working-directory: doner_admin
         run: flutter build apk --debug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: app-debug
-          path: doner_admin/build/app/outputs/flutter-apk/app-debug.apk
+          path: build/app/outputs/flutter-apk/app-debug.apk
